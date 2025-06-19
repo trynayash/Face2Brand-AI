@@ -1,0 +1,9 @@
+services:
+  - type: static
+    name: face2brandai
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_OPENROUTER_API_KEY
+        value: your-api-key-here 
