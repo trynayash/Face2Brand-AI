@@ -47,17 +47,17 @@ const Index = () => {
       <img src="/logoTransparent.png" alt="Logo" className="h-64 w-auto mt-6 mb-4 drop-shadow-xl" />
       <section id="home" className="flex flex-col items-center justify-center text-center py-8 px-4 w-full max-w-2xl">
         <h1 className="text-3xl sm:text-4xl font-extrabold mb-3 text-white text-glow">Transform Your Personality Into a Brand</h1>
-        <p className="text-base sm:text-lg text-secondary mb-6 max-w-2xl animate-fade-in text-glow">From selfie to strategy: AI builds your complete brand kit for the digital world. Built for Google Cloud Community Days 2025.</p>
+        <p className="text-base sm:text-lg text-secondary mb-6 max-w-2xl animate-fade-in text-glow">From selfie to strategy: AI builds your complete brand kit for the digital world. Built for Google Cloud Community Days 19 June 2025.</p>
         <Button className="gradient-brand text-white px-6 py-3 text-base font-bold rounded-full shadow-lg hover:scale-105 transition-transform animate-bounce" onClick={() => navigate('/login')}>Get Started</Button>
       </section>
-      {/* GCCD 2025 New Delhi Event Section */}
+      {/* GCCD 19 June 2025 New Delhi Event Section */}
       <section className="max-w-3xl mx-auto mb-12 px-4 w-full text-center animate-fade-in-up">
         <div className="bg-white/90 rounded-2xl shadow-xl p-6 border border-purple-100 flex flex-col items-center on-white-bg">
           <img src="/GoogleCloudLogo.png" alt="Google Cloud Logo" className="h-10 w-auto mb-3" />
-          <h2 className="text-3xl font-bold mb-2 text-purple-700">Google Cloud Community Days 2025</h2>
+          <h2 className="text-3xl font-bold mb-2 text-purple-700">Google Cloud Community Days 19 June 2025</h2>
           <p className="text-lg text-gray-700 mb-2">Hosted by GDG Cloud New Delhi</p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-4">
-            <span className="inline-block bg-purple-100 text-purple-700 px-4 py-2 rounded-full font-semibold">June 28, 2025</span>
+            <span className="inline-block bg-purple-100 text-purple-700 px-4 py-2 rounded-full font-semibold">19 June 2025</span>
             <span className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full font-semibold">Radisson Blu Plaza, Delhi Airport</span>
           </div>
           <p className="mb-4 text-gray-600">A power-packed day of tech talks, hands-on sessions, and networking with 400+ cloud enthusiasts, developers, and industry experts. Dive into Google Cloud, AI/ML, DevOps, Firebase, Vertex AI, and more!</p>
@@ -68,7 +68,7 @@ const Index = () => {
             <li>AI/ML community projects & showcases</li>
             <li>Networking, swag, and more!</li>
           </ul>
-          <a href="https://gdg.community.dev/events/details/google-gdg-cloud-new-delhi-presents-google-cloud-community-days-2025/" target="_blank" rel="noopener noreferrer" className="inline-block mt-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-full shadow-lg hover:scale-105 transition-transform">Learn More & Register</a>
+          <a href="https://gdg.community.dev/events/details/google-gdg-cloud-new-delhi-presents-google-cloud-community-days-19-june-2025/" target="_blank" rel="noopener noreferrer" className="inline-block mt-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold rounded-full shadow-lg hover:scale-105 transition-transform">Learn More & Register</a>
         </div>
       </section>
       <section id="features" className="max-w-4xl mx-auto mb-12 px-4 w-full">

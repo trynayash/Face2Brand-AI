@@ -68,4 +68,43 @@ router.post('/vision', async (req: Request, res: Response) => {
   }
 });
 
+// --- BrandKit Section Regeneration Route ---
+router.post('/brandkit/section', async (req: Request, res: Response) => {
+  const { name, ageRange, skinTone, vibeKeywords, expression, section } = req.body;
+  if (!name || !vibeKeywords || !section) {
+    return res.status(400).json({ error: 'Missing required fields: name, vibeKeywords, section' });
+  }
+  try {
+    const apiKey = process.env.OPENROUTER_API_KEY || process.env.VITE_OPENROUTER_API_KEY;
+    if (!apiKey) return res.status(500).json({ error: 'Missing OpenRouter API key' });
+    // Section-specific prompt
+    const prompt = `You are a world-class brand strategist AI. Given the following user details, generate ONLY the '${section}' field for their personal brand kit.\n\nUser Details: ${JSON.stringify({ name, ageRange, skinTone, vibeKeywords, expression })}\n\nOutput a single valid JSON object: { \"${section}\": ... } (no markdown, no explanation, no extra text).`;
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'mistralai/mixtral-8x7b-instruct',
+        messages: [{ role: 'user', content: prompt }],
+      }),
+    });
+    if (!response.ok) {
+      const errorText = await response.text();
+      return res.status(500).json({ error: 'OpenRouter API error', details: errorText });
+    }
+    const data = await response.json();
+    let sectionResult = {};
+    try {
+      sectionResult = JSON.parse(data.choices[0].message.content);
+    } catch (e) {
+      return res.status(500).json({ error: 'Failed to parse LLM response as JSON.' });
+    }
+    res.json(sectionResult);
+  } catch (err) {
+    res.status(500).json({ error: 'Section regeneration error' });
+  }
+});
+
 export default router; 

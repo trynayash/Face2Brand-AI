@@ -372,7 +372,7 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
         elevatorPitch: `I help businesses leverage cutting-edge technology to solve real-world problems. My unique approach combines technical expertise with human-centered design.`,
         pdfTitle: "The Visionary's Brand Kit",
         contentIdeas:
-          "1. 'Tech trends that will change everything in 2024' 2. 'Behind the scenes of my latest project' 3. 'Why I switched from corporate to entrepreneurship'",
+          "1. 'Tech trends that will change everything on 19 June 2025' 2. 'Behind the scenes of my latest project' 3. 'Why I switched from corporate to entrepreneurship'",
         usernameSuggestions: `@${formData.name
           .toLowerCase()
           .replace(" ", "")}vision, @the${formData.name

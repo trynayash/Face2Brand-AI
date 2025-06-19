@@ -1,6 +1,8 @@
 # 🚀 Face2BrandAI
 
-> **Craft your personal brand identity in minutes, powered by AI.**
+![Face2BrandAI Banner](public/Face2BrandAI.png)
+
+> **Build Project Submission for Google Cloud Community Days – New Delhi 2025**
 
 🎯 One-liner: AI-powered personal branding SaaS that turns selfies + self-description into full brand kits.
 
@@ -40,18 +42,154 @@ Cookie consent, privacy policy, and terms page included.
 
 ---
 
-## ✨ Project Overview
-Face2BrandAI is a next-generation web app that instantly transforms your personality and preferences into a complete, professional brand kit. From brand name and color palette to tagline, bio, and content ideas—Face2BrandAI does it all, beautifully and effortlessly.
+## 🌟 Overview
+
+**Face2BrandAI** is an AI-powered web app that transforms your personality and preferences into a complete, professional personal brand kit—instantly. Upload a selfie or fill out a detailed form, and get a custom brand identity, color palette, tagline, content ideas, and more, all powered by Google Cloud Vision, OpenRouter LLMs, and modern web tech.
 
 ---
 
-## 🌟 Features
-- **AI-Powered Brand Kit Generation**: Real-time, personalized results using OpenRouter API (with demo fallback).
-- **Stunning, Animated UI/UX**: Modern, mobile-first design with delightful micro-interactions and accessibility.
-- **Share & Download**: Instantly share your brand kit or download it as a PDF.
-- **Persistent Demo Mode**: Works offline and saves your last kit for seamless judging.
-- **Confetti & Success Animations**: Celebrate your new brand with style!
-- **Keyboard Navigation & ARIA Support**: Fully accessible for all users.
+## ✨ Features
+
+- 🔥 **AI-Powered Brand Kit Generation** (Selfie or Manual)
+- 🎨 **Color Palette Extraction & Visualization**
+- 📝 **Creative Taglines, Bios, and Content Ideas**
+- 📄 **Instant PDF Export**
+- 🖼️ **Visual Brand Previews**
+- 🔄 **Per-Section Regeneration** (AI-powered)
+- 📱 **Mobile-First, Responsive, and Accessible**
+- 🛡️ **Secure, Privacy-First Data Handling**
+- 🌐 **Google Cloud Vision API Integration**
+- 🔑 **Clerk Authentication & Supabase Storage**
+- ⚡ **Lightning-Fast Vite + React 18 + TypeScript**
+
+---
+
+## 🚀 Live Demo
+
+> [🌐 Try Face2BrandAI Live](#) <!-- Add your live link here -->
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React 18, TypeScript (strict), Vite, TailwindCSS, shadcn/ui
+- **Backend:** Node.js, Express, Google Cloud Vision API, OpenRouter LLM
+- **Auth & Storage:** Clerk, Supabase
+- **PDF Generation:** @react-pdf/renderer
+- **Testing:** Playwright, Vitest
+- **CI/CD:** GitHub Actions (optional)
+
+---
+
+## 📦 Setup & Installation
+
+```bash
+# 1. Clone the repo
+ git clone https://github.com/YOUR_USERNAME/Face2BrandAI.git
+ cd Face2BrandAI
+
+# 2. Install dependencies
+ npm install
+
+# 3. Configure environment variables
+ cp .env.example .env
+# Fill in your Google Cloud, Clerk, Supabase, and OpenRouter keys
+
+# 4. Start the dev server
+ npm run dev
+
+# 5. (Optional) Start the backend server
+ npm run backend
+```
+
+---
+
+## 🧑‍💻 Usage
+
+- **Selfie Mode:** Sign in, upload a selfie, and get a brand kit based on your face and vibe.
+- **Manual Mode:** Fill out the detailed form (no selfie required) for a custom kit.
+- **Download/Share:** Export your kit as PDF or share a public link.
+- **Regenerate:** Use the Regenerate button to improve any section with AI.
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+graph TD
+  A[User] -->|Uploads Selfie / Fills Form| B[React Frontend]
+  B -->|API Call| C[Node.js Backend]
+  C -->|Vision API| D[Google Cloud Vision]
+  C -->|LLM| E[OpenRouter LLM]
+  C -->|Store| F[Supabase]
+  B -->|Auth| G[Clerk]
+  B -->|PDF Export| H[React PDF]
+```
+
+---
+
+## 🖼️ Screenshots
+
+> _Add your screenshots here!_
+
+| Home | Brand Kit Result | PDF Export |
+|------|-----------------|------------|
+| ![](public/Face2BrandAI.png) | ![](public/BrandKit.jpg) | ![](public/BrandKit.jpg) |
+
+---
+
+## ♿ Accessibility & Performance
+
+- Fully keyboard navigable
+- ARIA labels and roles throughout
+- Color contrast and font size compliant
+- Lazy loading for images and components
+- Lighthouse score: 95+ (target)
+
+---
+
+## 🔒 Security & Privacy
+
+- No selfies or personal data stored permanently
+- All API keys and secrets managed via environment variables
+- HTTPS enforced in production
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/YourFeature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/YourFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+[MIT](LICENSE)
+
+---
+
+## 🙏 Acknowledgments
+
+- Google Cloud Community Days – New Delhi 2025
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Clerk](https://clerk.com/)
+- [Supabase](https://supabase.com/)
+- [OpenRouter](https://openrouter.ai/)
+- [React PDF](https://react-pdf.org/)
+- All contributors & testers!
+
+---
+
+> _Made with ❤️ by Yash Suthar for Google Cloud Community Days 2025_
+
+---
+
+## ✨ Project Overview
+Face2BrandAI is a next-generation web app that instantly transforms your personality and preferences into a complete, professional brand kit. From brand name and color palette to tagline, bio, and content ideas—Face2BrandAI does it all, beautifully and effortlessly.
 
 ---
 

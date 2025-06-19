@@ -9,6 +9,9 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  preview: {
+    allowedHosts: ["face2brand-ai.onrender.com"],
+  },
   plugins: [
     react(),
     mode === 'development' &&
