@@ -182,11 +182,63 @@ function RippleButton({ children, className = "", ...props }: { children: React.
   );
 }
 
+// Helper to render color palette safely
+function renderColorPalette(palette: any) {
+  if (typeof palette === 'string') {
+    // Try to extract hex codes from string
+    const matches = palette.match(/#[0-9a-fA-F]{6}/g);
+    if (matches) {
+      return (
+        <div className="flex gap-2 mb-2">
+          {matches.map((color) => (
+            <span
+              key={color}
+              className="w-8 h-8 rounded-full border"
+              style={{ background: color }}
+              title={color}
+            />
+          ))}
+        </div>
+      );
+    }
+    return <span>{palette}</span>;
+  }
+  if (Array.isArray(palette)) {
+    return (
+      <div className="flex gap-2 mb-2">
+        {palette.map((color, idx) => (
+          <span
+            key={color + idx}
+            className="w-8 h-8 rounded-full border"
+            style={{ background: color }}
+            title={color}
+          />
+        ))}
+      </div>
+    );
+  }
+  if (palette && typeof palette === 'object') {
+    return (
+      <div className="flex gap-2 mb-2">
+        {Object.entries(palette).map(([color, label], idx) => (
+          <span
+            key={color + idx}
+            className="w-8 h-8 rounded-full border"
+            style={{ background: color }}
+            title={`${label}: ${color}`}
+          />
+        ))}
+      </div>
+    );
+  }
+  return <span>N/A</span>;
+}
+
 const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
   const { user } = useUser();
   const navigate = useNavigate();
   const { online } = useNetworkStatus();
-
+  
   const [formData, setFormData] = useState<FormData>({
     name: "",
     ageRange: "",
@@ -194,7 +246,7 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
     vibeKeywords: "",
     expression: "",
   });
-
+  
   const [brandResult, setBrandResult] = useState<BrandResult | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -270,14 +322,14 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
         "https://openrouter.ai/api/v1/chat/completions",
         {
           method: "POST",
-          headers: {
+        headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${apiKey}`,
-          },
-          body: JSON.stringify({
-            model: "mistralai/mixtral-8x7b-instruct",
+        },
+        body: JSON.stringify({
+          model: "mistralai/mixtral-8x7b-instruct",
             messages: [{ role: "user", content: prompt }],
-          }),
+        }),
         }
       );
       if (!response.ok) {
@@ -636,9 +688,9 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
               </div>
             </SignedIn>
             <SignedOut>
-              <Button
+              <Button 
                 onClick={() => navigate("/auth")}
-                variant="outline"
+                variant="outline" 
                 className="gap-2"
               >
                 <LogIn className="w-4 h-4" />
@@ -647,7 +699,7 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
             </SignedOut>
           </div>
         </div>
-        {/* Input Form */}
+          {/* Input Form */}
         <section
           aria-labelledby="about-you-heading"
           className="w-full max-w-lg mx-auto mb-8"
@@ -660,9 +712,9 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
                   id="about-you-heading"
                   className="text-2xl font-extrabold text-gray-900 tracking-tight"
                 >
-                  Tell Us About You
-                </h2>
-              </div>
+                Tell Us About You
+              </h2>
+            </div>
               <span className="text-sm text-gray-500 text-center max-w-xs">
                 This info helps us create a brand kit that truly fits you. <span className="font-medium text-purple-500">No selfie required in custom mode!</span>
               </span>
@@ -767,17 +819,17 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
                     <TooltipContent>We use your name to personalize your brand kit.</TooltipContent>
                   </Tooltip>
                 </div>
-                <Input
-                  id="name"
+                  <Input
+                    id="name"
                   type="text"
                   autoComplete="name"
-                  placeholder="e.g., Sarah Johnson"
-                  value={formData.name}
+                    placeholder="e.g., Sarah Johnson"
+                    value={formData.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   className={`w-full h-12 text-gray-900 placeholder-gray-500 rounded-lg border px-10 py-2 ${!formData.name && isGenerating ? "border-red-500 animate-shake" : ""} focus:animate-pulse`}
-                  aria-label="Full Name"
+                    aria-label="Full Name"
                   aria-required="true"
-                />
+                  />
                 {!formData.name && isGenerating && (
                   <span className="text-red-500 text-xs animate-bounce animate-fade-in">
                     Name is required.
@@ -950,57 +1002,46 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
           </Card>
         </section>
 
-        {/* Results Display */}
-        <div className="w-full rounded-2xl shadow-lg bg-white/90 p-4 sm:p-6">
-          {brandResult ? (
+          {/* Results Display */}
+          <div className="w-full rounded-2xl shadow-lg bg-white/90 p-4 sm:p-6">
+            {brandResult ? (
             <Card className="max-w-2xl mx-auto mt-8 shadow-2xl rounded-3xl bg-white/90 backdrop-blur-lg p-8 animate-fade-in">
               <div className="flex items-center gap-3 mb-6">
                 <CheckCircle className="text-green-500 w-8 h-8" />
                 <h2 className="text-2xl font-extrabold text-gray-900">Your Brand Kit is Ready!</h2>
-              </div>
+                      </div>
               <Accordion type="multiple" className="space-y-4">
-                <AccordionItem value="brandName">
+                    <AccordionItem value="brandName">
                   <AccordionTrigger>
                     <User className="w-5 h-5 text-purple-500" /> Brand Name
-                  </AccordionTrigger>
+                      </AccordionTrigger>
                   <AccordionContent>
                     <span className="text-xl font-bold">{brandResult.brandName}</span>
                     <Button onClick={() => navigator.clipboard.writeText(brandResult.brandName)} size="sm" className="ml-2">Copy</Button>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="colorPalette">
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="colorPalette">
                   <AccordionTrigger>
                     <Palette className="w-5 h-5 text-pink-500" /> Color Palette
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="flex gap-2 mb-2">
-                      {typeof brandResult.colorPalette === 'string' && brandResult.colorPalette.match(/#[0-9a-fA-F]{6}/g)
-                        ? brandResult.colorPalette.match(/#[0-9a-fA-F]{6}/g)!.map((color) => (
-                            <span
-                              key={color}
-                              className="w-8 h-8 rounded-full border"
-                              style={{ background: color }}
-                              title={color}
-                            />
-                          ))
-                        : <span>{brandResult.colorPalette}</span>}
-                    </div>
+                    {renderColorPalette(brandResult.colorPalette)}
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="personalityTraits">
+                    <AccordionItem value="personalityTraits">
                   <AccordionTrigger>
                     <Target className="w-5 h-5 text-blue-500" /> Personality Traits
                   </AccordionTrigger>
                   <AccordionContent>
                     <span>{brandResult.personalityTraits}</span>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="tagline">
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="tagline">
                   <AccordionTrigger>
                     <Lightbulb className="w-5 h-5 text-yellow-500" /> Tagline
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-2">
                       <span className="italic">{Array.isArray(brandResult.tagline) ? brandResult.tagline[0] : brandResult.tagline}</span>
                       <Button onClick={() => navigator.clipboard.writeText(Array.isArray(brandResult.tagline) ? brandResult.tagline[0] : brandResult.tagline)} size="sm">Copy</Button>
                       <Button
@@ -1015,19 +1056,19 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
                         ) : (
                           <Lightbulb className="w-4 h-4" />
                         )} Regenerate
-                      </Button>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="profilePhotoStyle">
+                                </Button>
+                          </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="profilePhotoStyle">
                   <AccordionTrigger>
                     <Camera className="w-5 h-5 text-green-500" /> Profile Photo Style
                   </AccordionTrigger>
                   <AccordionContent>
                     <span>{brandResult.profilePhotoStyle}</span>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="usernameSuggestions">
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="usernameSuggestions">
                   <AccordionTrigger>
                     <Hash className="w-5 h-5 text-indigo-500" /> Username Suggestions
                   </AccordionTrigger>
@@ -1036,14 +1077,14 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
                       <span>{brandResult.usernameSuggestions}</span>
                       <Button onClick={() => navigator.clipboard.writeText(brandResult.usernameSuggestions)} size="sm">Copy</Button>
                     </div>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="bio">
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="bio">
                   <AccordionTrigger>
                     <BookOpen className="w-5 h-5 text-pink-600" /> Bio
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-2">
                       <span>{Array.isArray(brandResult.bio) ? brandResult.bio[0] : brandResult.bio}</span>
                       <Button onClick={() => navigator.clipboard.writeText(Array.isArray(brandResult.bio) ? brandResult.bio[0] : brandResult.bio)} size="sm">Copy</Button>
                       <Button
@@ -1058,11 +1099,11 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
                         ) : (
                           <BookOpen className="w-4 h-4" />
                         )} Regenerate
-                      </Button>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="contentIdeas">
+                                </Button>
+                          </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="contentIdeas">
                   <AccordionTrigger>
                     <Sparkles className="w-5 h-5 text-purple-400" /> Content Ideas
                   </AccordionTrigger>
@@ -1084,10 +1125,10 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
                       ) : (
                         <Sparkles className="w-4 h-4" />
                       )} Regenerate
-                    </Button>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                                </Button>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
               <div className="flex gap-4 mt-8">
                 <PDFDownloadLink
                   document={
@@ -1148,25 +1189,25 @@ const Face2Brand = ({ customMode = false }: Face2BrandProps) => {
                   <Copy className="w-4 h-4" /> Share
                 </Button>
               </div>
-            </Card>
-          ) : (
-            <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm h-96 flex items-center justify-center animate-fade-in">
-              <div className="text-center text-gray-500">
+              </Card>
+            ) : (
+              <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm h-96 flex items-center justify-center animate-fade-in">
+                <div className="text-center text-gray-500">
                 <motion.span
                   whileHover={{ rotate: [0, -10, 10, -10, 10, 0] }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Sparkles className="w-16 h-16 mx-auto mb-4 text-purple-300 animate-float" />
-                </motion.span>
-                <p className="text-lg">Your brand kit will appear here</p>
+                    <Sparkles className="w-16 h-16 mx-auto mb-4 text-purple-300 animate-float" />
+                  </motion.span>
+                  <p className="text-lg">Your brand kit will appear here</p>
                 <p className="text-sm">
                   Fill out the form and click generate
                 </p>
-              </div>
-            </Card>
-          )}
-        </div>
-      </div>
+                </div>
+              </Card>
+            )}
+          </div>
+          </div>
     </>
   ) : (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-50 via-white to-pink-50">
