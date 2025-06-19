@@ -7,10 +7,12 @@ import { useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { motion } from 'framer-motion';
+import { useNetworkStatus } from '@/hooks/use-network-status';
 
 const Auth = () => {
   const navigate = useNavigate();
   const { isSignedIn, isLoaded } = useUser();
+  const { online } = useNetworkStatus();
 
   useEffect(() => {
     // Only redirect if Clerk has finished loading and user is signed in
@@ -27,6 +29,11 @@ const Auth = () => {
         <div className="absolute bottom-10 right-1/4 w-40 h-40 bg-pink-200 rounded-full opacity-10 animate-float-slow" />
         <div className="absolute top-1/2 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-10 animate-float-reverse" />
       </div>
+      <div className="absolute top-4 left-4 z-10">
+        <a href="/" aria-label="Back to Home" className="group">
+          <svg className="w-8 h-8 text-purple-500 group-hover:text-purple-700 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+        </a>
+      </div>
       <div className="w-full max-w-md mx-auto z-10">
         <div className="flex flex-col items-center mb-8">
           <img src="/logoTransparent.png" alt="Face2BrandAI Logo" className="h-32 w-auto mb-4 drop-shadow-xl" />
@@ -37,10 +44,10 @@ const Auth = () => {
             <div className="flex flex-col gap-6">
               <h2 className="text-2xl font-bold text-center text-gray-800 mb-2">Sign in to continue</h2>
               <SignInButton mode="modal" forceRedirectUrl="/">
-                <Button className="w-full h-12 gradient-brand text-white text-lg font-semibold rounded-lg shadow-md">Sign In</Button>
+                <Button className="w-full h-12 gradient-brand text-white text-lg font-semibold rounded-lg shadow-md" disabled={!online} title={!online ? 'You are offline. Please connect to the internet to sign in.' : ''}>Sign In</Button>
               </SignInButton>
               <SignUpButton mode="modal" forceRedirectUrl="/">
-                <Button variant="outline" className="w-full h-12 border-purple-200 text-purple-700 text-lg font-semibold rounded-lg shadow-md">Create Account</Button>
+                <Button variant="outline" className="w-full h-12 border-purple-200 text-purple-700 text-lg font-semibold rounded-lg shadow-md" disabled={!online} title={!online ? 'You are offline. Please connect to the internet to sign up.' : ''}>Create Account</Button>
               </SignUpButton>
             </div>
           </SignedOut>
@@ -54,7 +61,7 @@ const Auth = () => {
         </div>
         <div className="flex justify-center items-center gap-2 text-gray-400 text-xs mt-6">
           <span>Built with</span>
-          <img src="/love.png" alt="love" className="h-6 w-6 inline mx-1 align-middle" />
+          <img src="/love.png" alt="love" className="h-6 w-6 inline mx-1 align-middle animate-blink-slow" />
           <span>by <span className="font-bold">Yash Suthar</span> for Google Cloud Community Event</span>
         </div>
       </div>

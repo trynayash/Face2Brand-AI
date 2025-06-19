@@ -24,14 +24,17 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+				primary: '#FFFFFF',
+				secondary: '#D1D5DB',
+				accentCoral: {
+					from: '#FF5F6D',
+					to: '#FFC371',
 				},
-				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))'
+				accentLavender: {
+					from: '#A18CD1',
+					to: '#FBC2EB',
 				},
+				buttonText: '#0F172A',
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
@@ -89,7 +92,14 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+			},
+			textShadow: {
+				glow: '0 2px 16px #A18CD1, 0 1px 2px #fff2',
+			},
+			backgroundImage: {
+				'accent-gradient-coral': 'linear-gradient(90deg, #FF5F6D 0%, #FFC371 100%)',
+				'accent-gradient-lavender': 'linear-gradient(90deg, #A18CD1 0%, #FBC2EB 100%)',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

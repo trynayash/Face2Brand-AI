@@ -2,6 +2,42 @@
 
 > **Craft your personal brand identity in minutes, powered by AI.**
 
+🎯 One-liner: AI-powered personal branding SaaS that turns selfies + self-description into full brand kits.
+
+🧠 Why It Matters:
+Empowering individuals, creators, and entrepreneurs to discover and define their personal brand identity in minutes using AI and Google Cloud.
+
+🌐 Live Demo: [https://face2brandai.vercel.app](https://face2brandai.vercel.app)
+
+🧰 Tech Stack:
+- Frontend: React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui
+- Backend: Supabase, Google Cloud Vision API (image analysis), OpenRouter (Mistral model)
+- Auth: Clerk
+- Deployment: Vercel
+
+🧪 Testing:
+- Unit: Jest + React Testing Library
+- E2E: Playwright (basic happy flow)
+- Run tests with: `npm test` or `npm run e2e`
+
+🚀 Get Started Locally:
+```sh
+git clone https://github.com/your-username/face2brandai.git
+cd face2brandai
+cp .env.example .env
+npm install
+npm run dev
+```
+
+🔐 Set Environment Variables:
+Refer to `.env.example` for required keys (Clerk, Supabase, Vision API).
+
+📸 Screenshots:
+![Dashboard](public/BrandKit.jpg)
+
+📄 Legal:
+Cookie consent, privacy policy, and terms page included.
+
 ---
 
 ## ✨ Project Overview
@@ -73,11 +109,6 @@ If deployed on Google Cloud, Face2BrandAI would leverage:
    ```
 4. **Open in your browser:**
    [http://localhost:8080](http://localhost:8080)
-
----
-
-## 📸 Screenshots
-(Add screenshots or a screen recording here to showcase the app. Judges: Please view the UI/UX and mobile responsiveness on your device or emulator.)
 
 ---
 
@@ -169,3 +200,30 @@ You can deploy Face2BrandAI to Vercel in minutes:
 - Vercel will auto-detect the Vite + React setup.
 - All static assets and serverless functions are supported.
 - For custom domains, set them up in the Vercel dashboard.
+
+---
+
+## Testing
+
+### Unit Tests
+Run all unit tests and see coverage:
+```sh
+npm test -- --coverage
+```
+
+### E2E Tests
+Run Playwright E2E tests (ensure local dev server is running):
+```sh
+npm run dev
+npm run e2e
+```
+
+---
+
+## Environment Variables
+See `.env.example` for all required variables and descriptions.
+
+---
+
+## License
+MIT
