@@ -5,25 +5,18 @@ import { Button } from '@/components/ui/button';
 import { Sparkles, User, LogIn, UserPlus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useUser } from '@clerk/clerk-react';
 
 const Auth = () => {
   const navigate = useNavigate();
+  const { isSignedIn, isLoaded } = useUser();
 
   useEffect(() => {
-    // Redirect authenticated users to home page
-    const checkAuth = () => {
-      const user = document.querySelector('[data-clerk-user]');
-      if (user) {
-        navigate('/');
-      }
-    };
-    
-    // Check immediately and set up a listener
-    checkAuth();
-    const interval = setInterval(checkAuth, 1000);
-    
-    return () => clearInterval(interval);
-  }, [navigate]);
+    // Only redirect if Clerk has finished loading and user is signed in
+    if (isLoaded && isSignedIn) {
+      navigate('/', { replace: true });
+    }
+  }, [isSignedIn, isLoaded, navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
@@ -54,14 +47,14 @@ const Auth = () => {
                 </p>
                 
                 <div className="space-y-3">
-                  <SignInButton mode="modal" fallbackRedirectUrl="/">
+                  <SignInButton mode="modal" forceRedirectUrl="/">
                     <Button className="w-full h-12 gradient-brand text-white hover:opacity-90 transition-all duration-300">
                       <LogIn className="w-5 h-5 mr-2" />
                       Sign In
                     </Button>
                   </SignInButton>
                   
-                  <SignUpButton mode="modal" fallbackRedirectUrl="/">
+                  <SignUpButton mode="modal" forceRedirectUrl="/">
                     <Button variant="outline" className="w-full h-12 border-purple-200 hover:bg-purple-50">
                       <UserPlus className="w-5 h-5 mr-2" />
                       Create Account
@@ -78,8 +71,9 @@ const Auth = () => {
                 <div className="mb-4">
                   <UserButton afterSignOutUrl="/auth" />
                 </div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-4"></div>
                 <p className="text-gray-600">
-                  You are signed in! Redirecting to the app...
+                  Redirecting you to the app...
                 </p>
               </CardContent>
             </Card>
