@@ -1,6 +1,17 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
+interface BrandKit {
+  brandName: string;
+  tagline: string;
+  colorPalette: string;
+  personalityTraits: string;
+  profilePhotoStyle: string;
+  usernameSuggestions: string;
+  bio: string;
+  contentIdeas: string;
+}
+
 const styles = StyleSheet.create({
   page: {
     fontFamily: 'Helvetica',
@@ -40,7 +51,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const BrandKitPDF = ({ kit }: { kit: any }) => (
+const BrandKitPDF = ({ kit }: { kit: BrandKit }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <Text style={styles.header}>{kit.brandName}</Text>

@@ -1,13 +1,13 @@
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
+import { Button } from '../../components/ui/button';
 import { Sparkles, User, LogIn, UserPlus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarImage } from '../../components/ui/avatar';
 import { motion } from 'framer-motion';
-import { useNetworkStatus } from '@/hooks/use-network-status';
+import { useNetworkStatus } from '../../features/common/hooks/use-network-status';
 
 const Auth = () => {
   const navigate = useNavigate();

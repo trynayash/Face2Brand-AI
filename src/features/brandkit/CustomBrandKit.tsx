@@ -1,12 +1,12 @@
 import React from 'react';
-import Face2Brand from '../components/Face2Brand';
+import Face2Brand from './Face2Brand';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../components/ui/button';
+import { Button } from '../../components/ui/button';
 
 const CustomBrandKit = () => {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
       {/* Back to Home Arrow */}
       <button
         onClick={() => navigate('/')}

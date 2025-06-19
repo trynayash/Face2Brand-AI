@@ -1,10 +1,10 @@
-import Face2Brand from '@/components/Face2Brand';
+import Face2Brand from './Face2Brand';
 import { useUser, UserButton } from '@clerk/clerk-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../../components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Lottie from 'lottie-react';
-import onboardingLottie from '../assets/onboarding-lottie.json';
+import onboardingLottie from '../../assets/onboarding-lottie.json';
 
 const Index = () => {
   const { isSignedIn } = useUser();

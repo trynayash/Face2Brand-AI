@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '../../components/ui/button';
+import { Input } from '../../components/ui/input';
+import { Textarea } from '../../components/ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { UserButton } from '@clerk/clerk-react';
 
 interface BrandKit {
@@ -14,6 +14,9 @@ interface BrandKit {
   niche?: string;
   socialBio?: string;
 }
+
+// Use environment variable for backend API base URL (for frontend-backend separation)
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
 
 const Dashboard = () => {
   const [selfie, setSelfie] = useState<File | null>(null);
@@ -59,7 +62,7 @@ const Dashboard = () => {
     setLoading(true);
     try {
       const prompt = `You are a brand strategist AI. Given this selfie (base64 string or placeholder) and these details, generate a JSON brand kit with: brandName, tagline, fontPairing, colorPalette, profilePhotoStyle, niche, socialBio.\n\nSelfie: [base64 omitted]\nName: ${name}\nVision/Goal: ${vision}\nExpression/Personality: ${expression}`;
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      const response = await fetch(`${apiBaseUrl}/api/v1/chat/completions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -152,7 +155,7 @@ const Dashboard = () => {
           <CardContent>
             <form className="space-y-6" onSubmit={handleSubmit}>
               {/* Place Face2BrandAI.png just above the picture upload tool */}
-              <img src="/Face2BrandAI.png" alt="Face2BrandAI Logo" className="h-14 w-auto mb-4 mx-auto drop-shadow" />
+              <img src="/Face2BrandAI.png" alt="Face2BrandAI Logo" className="h-20 w-auto mb-4 mx-auto drop-shadow" />
               <div className="flex flex-col items-center gap-3">
                 {selfiePreview ? (
                   <div className="relative group">
@@ -169,9 +172,9 @@ const Dashboard = () => {
                 )}
                 <span className="text-xs text-gray-400 text-center mt-1">Your selfie is processed securely and never stored permanently.</span>
               </div>
-              <Input placeholder="Your Name" value={name} onChange={e => setName(e.target.value)} className="h-12" required />
-              <Textarea placeholder="Your Vision or Goal" value={vision} onChange={e => setVision(e.target.value)} className="min-h-16" required />
-              <Input placeholder="Expression or Personality Trait" value={expression} onChange={e => setExpression(e.target.value)} className="h-12" required />
+              <Input placeholder="Your Name" value={name} onChange={e => setName(e.target.value)} className="h-12 text-gray-900 placeholder-gray-400" required />
+              <Textarea placeholder="Your Vision or Goal" value={vision} onChange={e => setVision(e.target.value)} className="min-h-16 text-gray-900 placeholder-gray-400" required />
+              <Input placeholder="Expression or Personality Trait" value={expression} onChange={e => setExpression(e.target.value)} className="h-12 text-gray-900 placeholder-gray-400" required />
               {error && <div className="text-red-500 text-sm animate-bounce animate-fade-in">{error}</div>}
               <Button type="submit" className="w-full gradient-brand text-white font-bold h-12" disabled={loading}>{loading ? 'Generating...' : 'Generate Brand Kit'}</Button>
             </form>
@@ -186,9 +189,9 @@ const Dashboard = () => {
             <CardContent className="space-y-2">
               <div><span className="font-semibold">Brand Name:</span> {brandKit.brandName}</div>
               <div><span className="font-semibold">Tagline:</span> {brandKit.tagline}</div>
-              <div><span className="font-semibold">Font Pairing:</span> {Array.isArray(brandKit.fontPairing) ? brandKit.fontPairing.join(', ') : brandKit.fontPairing}</div>
+              <div><span className="font-semibold">Font Pairing:</span> {typeof brandKit.fontPairing === 'string' ? brandKit.fontPairing : Array.isArray(brandKit.fontPairing) ? brandKit.fontPairing.join(', ') : brandKit.fontPairing && typeof brandKit.fontPairing === 'object' ? Object.entries(brandKit.fontPairing).map(([k, v]) => <div key={k}><strong>{k}:</strong> {v}</div>) : null}</div>
               <div><span className="font-semibold">Color Palette:</span> {typeof brandKit.colorPalette === 'string' ? brandKit.colorPalette : Array.isArray(brandKit.colorPalette) ? brandKit.colorPalette.map((c: string, i: number) => <span key={i} className="inline-block w-6 h-6 rounded-full mr-1" style={{ background: c }} title={c}></span>) : brandKit.colorPalette && typeof brandKit.colorPalette === 'object' ? Object.entries(brandKit.colorPalette).map(([name, color], i) => <span key={i} className="inline-block w-6 h-6 rounded-full mr-1" style={{ background: color }} title={`${name}: ${color}`}></span>) : null}</div>
-              <div><span className="font-semibold">Profile Photo Style:</span> {brandKit.profilePhotoStyle}</div>
+              <div><span className="font-semibold">Profile Photo Style:</span> {typeof brandKit.profilePhotoStyle === 'string' ? brandKit.profilePhotoStyle : brandKit.profilePhotoStyle}</div>
               <div><span className="font-semibold">Niche:</span> {brandKit.niche}</div>
               <div><span className="font-semibold">Social Bio:</span> {brandKit.socialBio}</div>
             </CardContent>

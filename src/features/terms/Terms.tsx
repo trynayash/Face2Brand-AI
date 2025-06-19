@@ -19,7 +19,7 @@ const Terms = () => {
       {/* Terms Logo */}
       <div className="bg-white/90 rounded-2xl shadow-xl p-8 max-w-2xl w-full border border-purple-100">
         {/* Centered Terms Logo above heading */}
-        <img src="/terms.png" alt="Terms Logo" className="h-16 w-16 rounded-xl mx-auto mb-4 object-cover" />
+        <img src="/terms.png" alt="Terms Logo" className="h-16 w-16 rounded-xl mx-auto mb-4 object-cover max-w-full" />
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2 text-blue-700">Terms & Conditions</h1>

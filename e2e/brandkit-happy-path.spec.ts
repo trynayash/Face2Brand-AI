@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error playwright types
 // eslint-disable-next-line
 /// <reference types="@playwright/test" />
 import { test, expect } from '@playwright/test';

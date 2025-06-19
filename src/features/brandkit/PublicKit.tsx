@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
+import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../../components/ui/accordion';
+
+interface BrandKit {
+  id: string;
+  brandName: string;
+  colorPalette: string;
+  personalityTraits: string;
+  tagline: string;
+  profilePhotoStyle: string;
+  usernameSuggestions: string;
+  bio: string;
+  contentIdeas: string;
+}
 
 const PublicKit = () => {
   const { id } = useParams();
-  const [kit, setKit] = useState(null);
+  const [kit, setKit] = useState<BrandKit | null>(null);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     // Try to fetch from localStorage (for demo); replace with Supabase fetch for production
     const kits = JSON.parse(localStorage.getItem('publicBrandKits') || '[]');
-    const found = kits.find((k: any) => k.id === id);
+    const found = kits.find((k: BrandKit) => k.id === id);
     if (found) setKit(found);
     else setNotFound(true);
   }, [id]);

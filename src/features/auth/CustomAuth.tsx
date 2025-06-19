@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSignIn, useSignUp, useClerk, useUser } from '@clerk/clerk-react';
 import { useNavigate } from 'react-router-dom';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
+import { Avatar, AvatarImage } from '../../components/ui/avatar';
+import { Button } from '../../components/ui/button';
 import type { OAuthStrategy } from '@clerk/types';
 
 const CustomAuth = () => {
@@ -43,8 +43,8 @@ const CustomAuth = () => {
           setError('Check your email for a verification link.');
         }
       }
-    } catch (err: any) {
-      setError(err.errors?.[0]?.message || err.message || 'Authentication failed.');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Authentication failed.');
     } finally {
       setLoading(false);
     }
@@ -60,8 +60,8 @@ const CustomAuth = () => {
       } else {
         await signUp.authenticateWithRedirect({ strategy, redirectUrl: '/' });
       }
-    } catch (err: any) {
-      setError(err.errors?.[0]?.message || err.message || 'Social login failed.');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Social login failed.');
     } finally {
       setLoading(false);
     }
