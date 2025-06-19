@@ -40,3 +40,53 @@
 .read-the-docs {
   color: #888;
 }
+
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(0.75rem) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(0.75rem) rotate(-360deg); }
+}
+.animate-orbit {
+  animation: orbit 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+.spin-heart {
+  animation: spin 1.2s linear infinite;
+}
+
+@media (max-width: 640px) {
+  @keyframes fade-in-mobile {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in-mobile {
+    animation: fade-in-mobile 0.7s cubic-bezier(0.4,0,0.2,1) both;
+  }
+
+  @keyframes pop-mobile {
+    0% { opacity: 0; transform: scale(0.95) translateY(32px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .pop-mobile {
+    animation: pop-mobile 0.5s cubic-bezier(0.4,0,0.2,1) both;
+  }
+
+  @keyframes ripple-mobile {
+    0% { box-shadow: 0 0 0 0 rgba(168,85,247,0.3); }
+    100% { box-shadow: 0 0 0 16px rgba(168,85,247,0); }
+  }
+  .ripple-mobile:active {
+    animation: ripple-mobile 0.4s linear;
+  }
+
+  @keyframes pulse-mobile {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+  .pulse-mobile {
+    animation: pulse-mobile 1.2s infinite;
+  }
+}

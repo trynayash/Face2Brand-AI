@@ -1,4 +1,3 @@
-
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,6 +5,8 @@ import { Sparkles, User, LogIn, UserPlus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { motion } from 'framer-motion';
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -19,69 +20,46 @@ const Auth = () => {
   }, [isSignedIn, isLoaded, navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <Sparkles className="w-8 h-8 text-purple-600 animate-pulse-slow" />
-            <h1 className="text-4xl md:text-6xl font-bold text-gradient">Face2Brand AI</h1>
-          </div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Transform your personality into a complete personal brand identity
-          </p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 via-white to-pink-100 relative overflow-hidden">
+      {/* Subtle animated background shapes */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <div className="absolute top-10 left-1/4 w-32 h-32 bg-purple-200 rounded-full opacity-20 animate-float" />
+        <div className="absolute bottom-10 right-1/4 w-40 h-40 bg-pink-200 rounded-full opacity-10 animate-float-slow" />
+        <div className="absolute top-1/2 right-10 w-24 h-24 bg-blue-200 rounded-full opacity-10 animate-float-reverse" />
+      </div>
+      <div className="w-full max-w-md mx-auto z-10">
+        <div className="flex flex-col items-center mb-8">
+          <img src="/logoTransparent.png" alt="Face2BrandAI Logo" className="h-32 w-auto mb-4 drop-shadow-xl" />
+          <p className="text-lg text-gray-700 font-semibold text-center mb-2">Transform your personality into a complete personal brand identity</p>
         </div>
-
-        <div className="max-w-md mx-auto">
+        <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-100">
           <SignedOut>
-            <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-2xl text-center justify-center">
-                  <User className="w-6 h-6 text-purple-600" />
-                  Welcome to Face2Brand AI
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-center text-gray-600 mb-6">
-                  Sign in to start creating your personal brand identity
-                </p>
-                
-                <div className="space-y-3">
-                  <SignInButton mode="modal" forceRedirectUrl="/">
-                    <Button className="w-full h-12 gradient-brand text-white hover:opacity-90 transition-all duration-300">
-                      <LogIn className="w-5 h-5 mr-2" />
-                      Sign In
-                    </Button>
-                  </SignInButton>
-                  
-                  <SignUpButton mode="modal" forceRedirectUrl="/">
-                    <Button variant="outline" className="w-full h-12 border-purple-200 hover:bg-purple-50">
-                      <UserPlus className="w-5 h-5 mr-2" />
-                      Create Account
-                    </Button>
-                  </SignUpButton>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="flex flex-col gap-6">
+              <h2 className="text-2xl font-bold text-center text-gray-800 mb-2">Sign in to continue</h2>
+              <SignInButton mode="modal" forceRedirectUrl="/">
+                <Button className="w-full h-12 gradient-brand text-white text-lg font-semibold rounded-lg shadow-md">Sign In</Button>
+              </SignInButton>
+              <SignUpButton mode="modal" forceRedirectUrl="/">
+                <Button variant="outline" className="w-full h-12 border-purple-200 text-purple-700 text-lg font-semibold rounded-lg shadow-md">Create Account</Button>
+              </SignUpButton>
+            </div>
           </SignedOut>
-
           <SignedIn>
-            <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
-              <CardContent className="p-8 text-center">
-                <div className="mb-4">
-                  <UserButton afterSignOutUrl="/auth" />
-                </div>
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-4"></div>
-                <p className="text-gray-600">
-                  Redirecting you to the app...
-                </p>
-              </CardContent>
-            </Card>
+            <div className="flex flex-col items-center gap-4">
+              <UserButton afterSignOutUrl="/auth" />
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto" />
+              <p className="text-gray-600 font-medium">Redirecting you to the app...</p>
+            </div>
           </SignedIn>
+        </div>
+        <div className="flex justify-center items-center gap-2 text-gray-400 text-xs mt-6">
+          <span>Built with</span>
+          <img src="/love.png" alt="love" className="h-6 w-6 inline mx-1 align-middle" />
+          <span>by <span className="font-bold">Yash Suthar</span> for Google Cloud Community Event</span>
         </div>
       </div>
     </div>
   );
 };
 
-export default Auth;
+export default Auth; 
