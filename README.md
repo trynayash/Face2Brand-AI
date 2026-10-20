@@ -305,7 +305,7 @@ A: 100%—the UI is designed for all devices.
 **Yash Suthar**  
 Indie developer passionate about AI, design, and building delightful user experiences.  
 Built Face2BrandAI from scratch for the Google Cloud event.  
-[LinkedIn](https://www.linkedin.com/in/yxshsuthar) | [GitHub](https://www.github.com/trynayash)
+[GitHub](https://www.github.com/trynayash)
 
 ---
 
