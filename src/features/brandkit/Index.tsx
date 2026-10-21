@@ -80,7 +80,7 @@ const Index = () => {
               <img src="/selfie-icon.png" alt="Selfie Icon" className="h-8 w-8" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Selfie-based Brand Kit</h3>
-            <p className="text-gray-600 mb-4 text-sm">Upload your selfie and let AI craft a brand identity that matches your personality and look.</p>
+            <p className="text-gray-600 mb-4 text-sm">Add a selfie and a few details about yourself, and an AI model writes a brand kit from your answers.</p>
             <Button className="gradient-brand text-white px-5 py-2 text-sm font-bold rounded-full shadow hover:scale-105 transition-transform" onClick={() => navigate('/face2brand')}>Try Now</Button>
           </div>
           {/* Manual Brand Kit Card */}

@@ -11,7 +11,7 @@ dotenv.config();
 // PLACEHOLDER: Add your Google Cloud Vision API key to your .env file as GOOGLE_CLOUD_VISION_API_KEY
 // or configure your service account credentials for production use.
 // Example .env line:
-// GOOGLE_CLOUD_VISION_API_KEY=AIzaSyDOrlaAns5-IXmPK3Y7ium2kA8CxP25ZBo
+// GOOGLE_CLOUD_VISION_API_KEY=your-google-cloud-vision-api-key
 
 // CORS whitelist (replace with your production domains)
 const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:5173').split(',');
